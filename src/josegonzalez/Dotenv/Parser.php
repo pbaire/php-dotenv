@@ -8,6 +8,11 @@ class Parser
     {
         $lines = preg_split('/\r\n|\r|\n/', $contents);
         $environment = array();
+        foreach ($_ENV as $envkey => $envvalue) {
+            if ( in_array(gettype($_ENV[$envkey]),["string","boolean","double","integer"]) ) {
+                $environment[$envkey] = $envvalue;
+            }
+        }
         foreach ($lines as $line) {
             $line = trim($line);
             if (empty($line)) {
